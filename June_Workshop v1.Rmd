@@ -1,0 +1,402 @@
+---
+title: "June Workshop - Most Useful R Functions + Minimal Examples "
+author: "R-Ladies Coding Club (London)"
+date: "15 June '16"
+output: html_document
+---
+
+```{r setup, include=FALSE, eval=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+> Use this document to follow along during the session, published version on RPubs is here: xxxxx    
+
+> This is *NOT* intended to be fully comprehensive list of every useful R function, rather a demonstration of selected examples. For a wider collection to work through, this Reference Card is recommended: https://cran.r-project.org/doc/contrib/Baggott-refcard-v2.pdf    
+
+> Additional CRAN reference cards and R material found here: https://cran.r-project.org/other-docs.html    
+
+### Schedule  
+
+####1st Half (to be updated)
+-- 6.30-6.35pm: A. Essentials    
+-- 6.35-7.15pm: B. Basics    
+-- 6:40-6:50pm: C. Core    
+-- 6:50-6:55pm: D. Common    
+-- 6:55-7:15pm: E.     
+
+####Break  
+-- 7:15-7.30pm        
+
+####2nd Half (to be updated)
+-- 6.30-6.35pm: A. Essentials    
+-- 6.35-6.40pm: B. Basics    
+-- 7:30-6:50pm: C. Core    
+-- 6:50-8:15pm: D. Common    
+-- 6:55-7:15pm: E. Further Functions
+
+---    
+
+> *"There's more than one way to skin a cat."*  
+
+---    
+
+### A. SOME ESSENTIALS FUNCTIONS
+
+#### 1. Bring up help documentation & examples - `?foo`, `help(foo)`, `example(foo)`
+
+```{r 1, eval=FALSE}
+?boxplot
+help(boxplot)
+example(boxplot)
+```
+
+---    
+
+#### 2. Load & Call CRAN Packages - `install.packages("foo")`, `library(foo)`
+i.e. functionality built for R but not pre-installed, referred to as 'base R'
+
+```{r 2, eval=FALSE}
+install.packages("wordcloud")
+
+library(wordcloud) #best-practice loading
+require(wordcloud) #often used instead of library, but don't use it (http://yihui.name/en/2014/07/library-vs-require/)
+```
+
+---    
+
+#### 3. Load & Call Packages from GitHub - `devtools::install_github("username/packagename")`
+
+```{r 3, eval=FALSE}
+install.packages("devtools")
+
+devtools::install_github("rstudio/shinyapps")
+```
+
+---    
+
+#### 4. Write Comments - `#foo`
+
+```{r 4, eval=FALSE}
+#Add comments within your code using a hashtag
+```
+
+---    
+
+#### 5. Load datasets from base R & called libraries - `data(foo)`
+
+```{r 5, eval=FALSE}
+data() #shows available datasets
+data(iris)
+```
+
+---    
+
+#### 6. I/O Loading Existing Local Data - `read.csv`, `read.table`
+
+##### (a) When already in the working directory where the data is  
+
+Import a local **csv** file (i.e. where data is separated by **commas**), saving it as an object:
+```{r load csv file, eval = FALSE}
+#this will create a data frame called "object"
+#the header argument is defaulted to TRUE, i.e. read.csv assumes your file has a header row and will take the first row of your csv to be the column names
+object <- read.csv("xxx.csv")
+
+#if your csv does not have a header row, add header = FALSE to the command
+#in this call default column headers will be assigned which can be changed
+object <- read.csv("xxx.csv", header = FALSE)
+```
+
+Import a local tab delimited file (i.e. where data is separated by **tabs**), saving is as an object:
+
+```{r load tab file, eval = FALSE}
+#this will create a data frame called "object"
+#the header argument is defaulted to TRUE, i.e. read.csv assumes your file has a header row and will take the first row of your csv to be the column names
+object <- read.table("xxx.txt", sep = "\t")
+
+#if your csv does not have a header row, add header = FALSE to the command
+#in this call default column headers will be assigned which can be changed
+object <- read.table("xxx.txt", sep = "\t", header = FALSE)
+```
+
+---    
+
+##### (b) When NOT in the working directory where the data is 
+
+For example to import and save a local **csv** file from a different working directory you can either need to specify the file path (operating system specific), e.g.:
+```{r load csv file path, eval = FALSE}
+#on a mac
+object <- read.csv("~/Desktop/R/data.csv")
+
+#on windows
+object <- read.csv("C:/Desktop/R/data.csv")
+```
+
+OR  
+
+You can use the file.choose() command which will interactively open up the file dialog box for you to browse and select the local file, e.g.:
+```{r load file.choose, eval = FALSE}
+object <- read.csv(file.choose())
+```
+
+---    
+
+##### (c) Copying and Pasting Data
+
+For relatively small amounts of data you can do an equivalent copy paste (operating system specific):
+```{r copy paste, eval = FALSE}
+#on a mac
+object <- read.table(pipe("pbpaste"))
+
+#on windows
+object <- read.table(file = "clipboard")
+```
+
+---    
+
+##### (d) Loading Non-Numerical Data - character strings
+
+Be careful when loading text data! R may assume character strings are statistical factor variables, e.g. "low", "medium", "high", when are just individual labels like names. To specify text data NOT to be converted into factor variables, add `stringsAsFactor = FALSE` to your `read.csv/read.table` command:
+
+```{r strings, eval = FALSE}
+object <- read.table("xxx.txt", stringsAsFactors = FALSE)
+```
+
+---    
+
+##### (e) Downloading Remote Data
+
+For accessing files from the web you can use the same `read.csv/read.table` commands. However, the file being downloaded does need to be in an R-friendly format (maximum of 1 header row, subsequent rows are the equivalent of one data record per row, no extraneous footnotes etc.). Here is an example downloading an online csv file from Pew Research:
+```{r remote data}
+object <- read.csv("https://vincentarelbundock.github.io/Rdatasets/csv/datasets/AirPassengers.csv")
+```
+
+---    
+
+#### 7. I/O Exporting Data Frame - `write.table()`
+
+Navigate to the working directory you want to save the data table into, then run the command (in this case creating a tab delimited file):
+```{r data table, eval = FALSE}
+write.table(object, "xxx.txt", sep = "\t")
+```
+
+---    
+
+#### 8. I/O Saving Down & Loading Objects - `save()`, `load()`
+
+Navigate to the working directory you want to save the object in then run the command:
+```{r save object, eval = FALSE}
+save(object, file = "xxx.rda")
+
+#reload the object
+load("xxx.rda")
+```
+
+---
+
+### B. SOME BASIC FUNCTIONS
+
+#### 9. Vector & Matrix Construction - `c()`, `cbind()`, `rbind()`
+Vectors & Matrices are very common R data structures.
+```{r 9, eval = FALSE}
+foo <- c(1, 2, 3, 4) #creates a vector by concatenating data 
+oof <- c("A", "B", "C", "D") 
+
+coof <- cbind(foo, oof) #bind vectors in column concatenation to make a matrix
+
+roof <- rbind(foo, oof) #bind vectors in row concatenation to make a matrix
+
+moof <- matrix(data = 1:12, nrow=3, ncol=4) #creates matrix by specifying set of values, no. of rows & no. of columns
+```
+
+---    
+
+#### 10. Vector & Matrix Explore - `length()`, `dim()`
+
+```{r 10, eval = FALSE}
+length(foo) #length of vector
+
+dim(coof) #returns dimensions (no. of rows & columns) of vector/matrix/dataframe
+```
+
+---    
+
+#### 11. Vector & Matrix Sort & Selection - `sort()`, `'vector'[]`, `'matrix'[]`
+
+```{r 11, eval = FALSE}
+jumble <- c(4, 1, 2, 3) 
+sort(jumble) #this numeric vector is sorted ascending (default)
+sort(jumble, decreasing = TRUE) #specify the decreasing arg to reverse default
+
+mumble <- c( "D", "B", "C", "A")
+sort(mumble) #this character vector is sorted ascending (default)
+sort(mumble, decreasing = TRUE) #specify the decreasing arg to reverse default
+
+jumble[1] #selects first value in our oof vector
+tail[jumble, 1] #selects last value
+jumble[c(1,3)] #selects the 1st & 3rd values
+jumble[-c(1,3)] #selects everything except the 1st & 3rd values
+
+coof[1,] #selects the 1st row of our coof matrix
+coof[,1] #selects the 1st column
+coof[2,1] #selects the value in the 2nd row, 1st column
+coof[,"oof"] #selects the column named "oof"
+coof[1:3,] #selects columns 1 to 3 inclusive
+coof[c(1,2,3),] #selects the 1st, 2nd & 3rd rows (same as previous)
+```
+
+---    
+
+#### 12. Create & Explore Data Frames - `data.frame()`, `class()`, `names()`, `str()`, `summary()`, `View()`, `head()`, `tail()`, `as.data.frame()`
+A data frame is a matrix-like data structure made up of lists of variables with the same number of rows, which can be of differing data types (numeric, character, factor etc.) - matrices must have columns all of the same data type.
+```{r 12, eval = FALSE}
+df <- data.frame("V1"=1:4, "V2"=c("A","B","C","D"), "V3"=5:8) #creates a data frame with 3 columns with 4 rows each
+
+class(df) #check data frame object class
+names(df) # returns column names
+str(df) #see structure of data frame
+summary(df) #returns basic summary stats 
+View(df) #invokes spreadsheet-style viewer
+head(df) #shows first parts of object
+tail(df) #shows last parts of object
+
+convert <- as.data.frame(coof) #convert a non-data frame object into a data frame
+```
+
+---    
+
+### C. SOME CORE FUNCTIONS
+
+#### 13. Data Frame Select & Manipulate - `table()`
+
+```{r 13, eval = FALSE}
+#create new data frame
+flavour <- c("choc", "strawberry", "vanilla", "choc", "strawberry", "strawberry")
+gender <- c("F", "F", "M", "M", "F", "M")
+icecream <- data.frame(flavour, gender)
+
+table(icecream$gender) #returns frequency distribution table with count of the selected data frame variable (df$variable)
+table(icecream$flavour) #as above
+table(icecream$flavour, icecream$gender) #2-way/contingency table
+```
+
+---
+
+#### 14. Descriptive/Summary Stats Functions - `mean()`, `median()`, `sd()`, `var()`, `sum()`, `min()`, `max()`, `range()`
+
+```{r 14, eval = FALSE}
+jumble <- c(4, 1, 2, 3) #re-using the jumble vector from before
+
+mean(jumble)
+median(jumble)
+sd(jumble)
+var(jumble)
+sum(jumble)
+min(jumble)
+max(jumble)
+range(jumble)
+```
+
+---    
+
+#### 15. Apply Functions - `apply()`
+`apply()` returns a vector, array or list of values where a specified function has been applied to the margins (rows/cols combo) of the original vector/array/list.
+```{r 15, eval = FALSE}
+moof <- matrix(data = 1:12, nrow=3, ncol=4) #re-using the moof matrix from before
+
+apply(X, MARGIN, FUN,...) #function arguments: X=an array, MARGIN=1 to apply to rows/2 to apply to cols, FUN=function to apply
+
+apply(moof, 2, sum) #using the moof matrix, apply the sum function to the columns
+
+apply(moof, 1, sum) #using the moof matrix, apply the sum function to the rows
+
+```
+
+---    
+
+#### 16. Apply Functions - `lapply()` using `list()`
+A list, a common data structure, is a generic vector containing objects of any types.    
+`lapply()` returns a list where each element returned is the result of applying a specified function to the objects in the list.
+```{r 16, eval = FALSE}
+bundle <- list(moof, jumble, foo) #creates list of various vectors and matrices
+
+lapply(X, FUN,...) #function arguments: X=a list, FUN=function to apply
+
+lapply(bundle, mean) #using the bundle list, apply the mean function to each object in the list
+```
+
+---    
+
+#### 17. Apply Functions - `tapply()`
+`tapply()` applies a specified function to specified groups/subsets of a factor variable.
+```{r 17, eval = FALSE}
+library(MASS) #call library with the required data
+data(painters) #load required data
+
+tapply(X, INDEX, FUN,...) #function arguments: X=an atomic object, INDEX=list of 1+ factors of X length, FUN=function to apply
+
+#AIM: calculate the mean Drawing Score of the painters, but grouped by School category
+tapply(painters$Drawing, painters$School, mean) #grouping the data by the 8 different Schools, apply the mean function to the Drawing Score variable to return the 8 mean scores
+```
+
+---
+
+### D. SOME COMMON FUNCTIONS
+
+#### 18. Programming Tools - `if-statement`
+`if-statement` used when certain computations are to execute only when a specific condition is met. Additionally other computations may execute when the condition is not met.
+```{r 18, eval = FALSE}
+if (condition.to.test < 10)
+    {
+    result.after.test = 'smaller'
+    }else{
+    result.after.test = 'bigger'
+    }
+#here we want to test if the object, 'condition.to.test' is smaller than 10. If it is smaller, another object, 'result.after.test' is assigned the value 'smaller'. Otherwise, the 'result.after.test' object is assigned the value 'bigger'
+
+condition.to.test <- 5 #we specific what the condition actually is
+
+result.after.test #return the result of our if-statement given the specific condition
+```
+
+---    
+
+#### 19. Programming Tools - `for loop`
+A `for loop` is a automation method for repeating (looping) a specific set of instructions for each element in a vector.
+```{r 19, eval = FALSE}
+for (i in 2010:2015)
+{
+  print(paste("In the year", i))
+}
+#here we want to print the same phrase but for each year between 2010 to 2015. 'i' stands for index - this loop executes the code chunk 'print(past("In the year", i)) for each index value
+
+```
+
+---    
+
+#### 20. Programming Tools - `function()...`
+User-programmed functions allow you to specify customised arguments and returned values.
+```{r 20, eval = FALSE}
+takehome.pay <- function(tax.rate, income)
+{
+  tax = tax.rate * income
+  return(income - tax)
+}
+#here we create a simplified take-home pay calculator (single-band), called 'takehome.pay'. It uses two arguments, a 'tax.rate', and an 'income' level. The function in the curly braces {} instructs what the 'takehome.pay' function should do when it is called, namely, calculate the tax owed in an object 'tax', and then return the result of the 'income' object minus the 'tax' object
+
+takehome.pay(tax.rate = 0.2, income = 25000)
+```
+
+---
+
+### E. FURTHER FUNCTIONS
+
+#### 21. Strings - `grep()`, `tolower()`, `nchar()`
+
+#### 22. Further Data Selection - `quantile()`, `cut()`, `which()`, `na.omit()`, `complete.cases()`, `sample()`
+
+#### 23. Further Data Creation - `seq()`, `rep()`
+
+#### .....Ad Infinitum!!
+
+---    
+
+> *Happy Coding!!*
