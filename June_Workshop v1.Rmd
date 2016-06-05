@@ -405,30 +405,34 @@ tapply(painters$Drawing, painters$School, mean) #grouping the data by the 8 diff
 
 ### D. SOME COMMON FUNCTIONS
 
-#### 20. Programming Tools - `if-statement`, `if...else statement`
-`if-statement` is used when certain computations are conditional and only execute when a specific condition is met - if the condition is not met, nothing executes. The `if...else statement` extends the `if-statement` by adding on a computation to execute when the condition is not met, i.e. the 'else' part of the statement.
+#### 20. Programming Tools - `if` statement, `if...else` statement
+An `if` statement is used when certain computations are conditional and only execute when a specific condition is met - if the condition is not met, nothing executes. The `if...else` statement extends the `if` statement by adding on a computation to execute when the condition is not met, i.e. the 'else' part of the statement.
 ```{r 20, eval = FALSE}
 #if-statement syntax
-if('test expression')
+if ('test expression')
 {
-'statement'
+    'statement'
 }
 
 #if...else statement
-if('test expression')
+if ('test expression')
 {
-'statement'
-}else{
-'another statement'
+    'statement'
+}
+else
+{
+    'another statement'
 }
 
 #AIM: here we want to test if the object, 'condition.to.test' is smaller than 10. If it is smaller, another object, 'result.after.test' is assigned the value 'smaller'. Otherwise, the 'result.after.test' object is assigned the value 'bigger'
 if (condition.to.test < 5)
-    {
+{
     result.after.test = 'Below Average'
-    }else{
+}
+else
+{
     result.after.test = 'Above Average'
-    }
+}
 
 condition.to.test <- 7 #we specify what the condition actually is
 
@@ -437,28 +441,28 @@ result.after.test #returns the result of our if-statement given the specific con
 
 ---
 
-#### 21. Programming Tools - `for loop`
-A `for loop` is an automation method for repeating (looping) a specific set of instructions for each element in a vector.
+#### 21. Programming Tools - `for` loop
+A `for` loop is an automation method for repeating (looping) a specific set of instructions for each element in a vector.
 ```{r 21, eval = FALSE}
 #for loop syntax requires a counter, often called 'i' to denote an index
-for('counter' in 'looping vector')
+for ('counter' in 'looping vector')
 {
-'instructions'
+    'instructions'
 }
 
 #AIM: here we want to print the phrase "In the Year yyyy" 6x, once for each year between 2010 to 2015.
 #this for loop executes the code chunk 'print(past("In the Year", i)) for each of the 'i' index values
 for (i in 2010:2015)
 {
-  print(paste("In the Year", i))
+    print(paste("In the Year", i))
 }
 
 #AIM: create an object which contains 10 items, namely each number between 1 and 10 squared
 #to store rather than just print results, an empty storage container needs to be created prior to running the loop, here called container
 container <- NULL
-for(i in 1:10)
+for (i in 1:10)
 {
-container[i] = i^2
+    container[i] = i^2
 }
 
 container #check results: the loop is instructed to square every element of the looping vector, 1:10. The ith element returned is therefore the value of i^2, e.g. the 3rd element is 3^2.
@@ -472,8 +476,8 @@ User-programmed functions allow you to specify customised arguments and returned
 #AIM: to create a simplified take-home pay calculator (single-band), called 'takehome.pay'. Our function therefore uses two arguments, a 'tax.rate', and an 'income' level. The code in the curly braces {} instructs what the 'takehome.pay' function should do when it is called, namely, calculate the tax owed in an object 'tax', and then return the result of the 'income' object minus the 'tax' object
 takehome.pay <- function(tax.rate, income)
 {
-  tax = tax.rate * income
-  return(income - tax)
+    tax = tax.rate * income
+    return(income - tax)
 }
 
 takehome.pay(tax.rate = 0.2, income = 25000) #call our function to calculate 'takehome.pay' on a 'tax.rate' of 20% and an 'income' of 25k
