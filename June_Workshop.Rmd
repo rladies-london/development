@@ -10,7 +10,7 @@ knitr::opts_chunk$set(echo = TRUE)
 ```
 > Use this document to follow along during the session, published version on RPubs: (to be updated)
 
-> This is *NOT* intended to be fully comprehensive list of every useful R function, rather a demonstration of selected examples. For a wider collection to work through, this Reference Card is recommended: https://cran.r-project.org/doc/contrib/Baggott-refcard-v2.pdf
+> This is *NOT* intended to be fully comprehensive list of every useful R function that exists, but is a practical demonstration of selected relevant examples presented in user-friendly format. For a wider collection to work through, this Reference Card is recommended: https://cran.r-project.org/doc/contrib/Baggott-refcard-v2.pdf
 
 > Additional CRAN reference cards and R material found here: https://cran.r-project.org/other-docs.html
 
@@ -99,12 +99,12 @@ devtools::install_github("rstudio/shinyapps")
 #### 4. Write Comments - `#foo`
 
 ```{r 4, eval=FALSE}
-#Add comments within your code using a hashtag
+#Add comments within your code using a hashtag - R will ignore everything to the right of the hashtag within that line
 ```
 
 ---
 
-#### 5. Load datasets from base R & called libraries - `data("foo")`
+#### 5. Load datasets from base R & Loaded Packages  - `data("foo")`
 
 ```{r 5, eval=FALSE}
 data() #shows available datasets
@@ -115,7 +115,7 @@ data("iris")
 
 #### 6. I/O Loading Existing Local Data - `read.csv`, `read.table`
 
-##### (a) When already in the working directory where the data is
+##### (a) I/O When already in the working directory where the data is
 
 Import a local **csv** file (i.e. where data is separated by **commas**), saving it as an object:
 ```{r load csv file, eval = FALSE}
@@ -142,7 +142,7 @@ object <- read.table("xxx.txt", sep = "\t", header = FALSE)
 
 ---
 
-##### (b) When NOT in the working directory where the data is
+##### (b) I/O When NOT in the working directory where the data is
 
 For example to import and save a local **csv** file from a different working directory you can either need to specify the file path (operating system specific), e.g.:
 ```{r load csv file path, eval = FALSE}
@@ -162,7 +162,7 @@ object <- read.csv(file.choose())
 
 ---
 
-##### (c) Copying and Pasting Data
+##### (c) I/O Copying & Pasting Data
 
 For relatively small amounts of data you can do an equivalent copy paste (operating system specific):
 ```{r copy paste, eval = FALSE}
@@ -175,7 +175,7 @@ object <- read.table(file = "clipboard")
 
 ---
 
-##### (d) Loading Non-Numerical Data - character strings
+##### (d) I/O Loading Non-Numerical Data - character strings
 
 Be careful when loading text data! R may assume character strings are statistical factor variables, e.g. "low", "medium", "high", when are just individual labels like names. To specify text data NOT to be converted into factor variables, add `stringsAsFactor = FALSE` to your `read.csv/read.table` command:
 
@@ -185,7 +185,7 @@ object <- read.table("xxx.txt", stringsAsFactors = FALSE)
 
 ---
 
-##### (e) Downloading Remote Data
+##### (e) I/O Downloading Remote Data
 
 For accessing files from the web you can use the same `read.csv/read.table` commands. However, the file being downloaded does need to be in an R-friendly format (maximum of 1 header row, subsequent rows are the equivalent of one data record per row, no extraneous footnotes etc.). Here is an example downloading an online csv file from Pew Research:
 ```{r remote data}
@@ -367,7 +367,7 @@ range(jumble)
 ---
 
 #### 17. Apply Functions - `apply()`
-`apply()` returns a vector, array or list of values where a specified function has been applied to the margins (rows/cols combo) of the original vector/array/list.
+`apply()` returns a vector, array or list of values where a specified function has been applied to the 'margins' (rows/cols combo) of the original vector/array/list.
 ```{r 17, eval = FALSE}
 moof <- matrix(data = 1:12, nrow=3, ncol=4) #re-using the moof matrix from before
 
