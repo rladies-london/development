@@ -50,7 +50,7 @@ knitr::opts_chunk$set(echo = TRUE)
 * 19. `tapply()`
 
 #####7:50pm | D. Common
-* 20. `if` statement`, `if...else` statement
+* 20. `if` statement, `if...else` statement
 * 21. `for` loop
 * 22. `function()...`
 
