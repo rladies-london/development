@@ -20,10 +20,10 @@ knitr::opts_chunk$set(echo = TRUE)
 
 #####6.30pm | A. Essentials
 * 1. `?foo`, `help(foo)`, `example(foo)`
-* 2. `install.packages("foo")`, `library(foo)`
+* 2. `install.packages("foo")`, `library("foo")`
 * 3. `devtools::install_github("username/packagename")`
 * 4. `#foo`
-* 5. `data(foo)`
+* 5. `data("foo")`
 * 6. `read.csv`, `read.table`
 * 7. `write.table()`
 * 8. `save()`, `load()`
@@ -74,14 +74,14 @@ example(boxplot)
 
 ---
 
-#### 2. Load & Call CRAN Packages - `install.packages("foo")`, `library(foo)`
+#### 2. Load & Call CRAN Packages - `install.packages("foo")`, `library("foo")`
 i.e. add-on functionality built for R but not pre-installed (base R)
 
 ```{r 2, eval=FALSE}
 install.packages("wordcloud")
 
-library(wordcloud) #best-practice loading
-require(wordcloud) #often used instead of library, but don't use it (http://yihui.name/en/2014/07/library-vs-require/)
+library("wordcloud") #best-practice loading
+require("wordcloud") #often used instead of library, but don't use it (http://yihui.name/en/2014/07/library-vs-require/)
 ```
 
 ---
@@ -104,11 +104,11 @@ devtools::install_github("rstudio/shinyapps")
 
 ---
 
-#### 5. Load datasets from base R & called libraries - `data(foo)`
+#### 5. Load datasets from base R & called libraries - `data("foo")`
 
 ```{r 5, eval=FALSE}
 data() #shows available datasets
-data(iris)
+data("iris")
 ```
 
 ---
@@ -292,8 +292,8 @@ convert <- as.data.frame(coof) #convert a non-data frame object into a data fram
 
 ```{r 13, eval = FALSE}
 #use 'painters' data frame
-library(MASS) #call library with the required data
-data(painters) #load required data
+library("MASS") #call package with the required data
+data("painters") #load required data
 View(painters) #scan dataset
 
 df[order(df$V1, df$V2...),] #function arguments: df=data frame, in square brackets specify within the order() the columns to sort by, and ',' to denote all rows. Note default ordering is Ascending
@@ -473,14 +473,14 @@ container #check results: the loop is instructed to square every element of the 
 #### 22. Programming Tools - `function()...`
 User-programmed functions allow you to specify customised arguments and returned values.
 ```{r 22, eval = FALSE}
-#AIM: to create a simplified take-home pay calculator (single-band), called 'takehome.pay'. Our function therefore uses two arguments, a 'tax.rate', and an 'income' level. The code in the curly braces {} instructs what the 'takehome.pay' function should do when it is called, namely, calculate the tax owed in an object 'tax', and then return the result of the 'income' object minus the 'tax' object
-takehome.pay <- function(tax.rate, income)
+#AIM: to create a simplified take-home pay calculator (single-band), called 'takehome_pay'. Our function therefore uses two arguments, a 'tax.rate', and an 'income' level. The code in the curly braces {} instructs what the 'takehome.pay' function should do when it is called, namely, calculate the tax owed in an object 'tax', and then return the result of the 'income' object minus the 'tax' object
+takehome_pay <- function(tax.rate, income)
 {
     tax = tax.rate * income
     return(income - tax)
 }
 
-takehome.pay(tax.rate = 0.2, income = 25000) #call our function to calculate 'takehome.pay' on a 'tax.rate' of 20% and an 'income' of 25k
+takehome_pay(tax.rate = 0.2, income = 25000) #call our function to calculate 'takehome_pay' on a 'tax.rate' of 20% and an 'income' of 25k
 ```
 
 ---
