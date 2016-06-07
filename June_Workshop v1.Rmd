@@ -495,7 +495,7 @@ takehome.pay(tax.rate = 0.2, income = 25000) #call our function to calculate 'ta
 
 #### 26. Other Apply-related functions - `split()`, `sapply()`, `aggregate()`
 
-#### 27. More Loops - `while loop`, `repeat loop`
+#### 27. More Loops - `while` loop, `repeat` loop
 
 #### .....Ad Infinitum!!
 
