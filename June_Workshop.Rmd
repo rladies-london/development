@@ -92,6 +92,8 @@ require("wordcloud") #often used instead of library, but don't use it (http://yi
 install.packages("devtools")
 
 devtools::install_github("rstudio/shinyapps")
+
+library("shinyapps")
 ```
 
 ---
