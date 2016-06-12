@@ -75,7 +75,7 @@ example(boxplot)
 ---
 
 #### 2. Load & Call CRAN Packages - `install.packages("foo")`, `library("foo")`
-i.e. add-on functionality built for R but not pre-installed (base R)
+i.e. add-on functionality built for R but not pre-installed (base R). At time of writing, the CRAN package repository featured 8,576 available packages.
 
 ```{r 2, eval=FALSE}
 install.packages("wordcloud")
