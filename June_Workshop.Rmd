@@ -10,9 +10,9 @@ knitr::opts_chunk$set(echo = TRUE)
 ```
 > Use this document to follow along during the session, published version on RPubs: (to be updated)
 
-> This is *NOT* intended to be fully comprehensive list of every useful R function that exists, but is a practical demonstration of selected relevant examples presented in user-friendly format. For a wider collection to work through, this Reference Card is recommended: https://cran.r-project.org/doc/contrib/Baggott-refcard-v2.pdf
+> This is *NOT* intended to be fully comprehensive list of every useful R function that exists, but is a practical demonstration of selected relevant examples presented in user-friendly format, all available in base R. For a wider collection to work through, this Reference Card is recommended: https://cran.r-project.org/doc/contrib/Baggott-refcard-v2.pdf
 
-> Additional CRAN reference cards and R material found here: https://cran.r-project.org/other-docs.html
+> Additional CRAN reference cards and R material (and non-English documentation) found here: https://cran.r-project.org/other-docs.html
 
 ---
 
@@ -310,6 +310,11 @@ library("MASS") #call package with the required data
 data("painters") #load required data
 View(painters) #scan dataset
 
+df$V1 #syntax for using a specific variable: df=data frame, '$', V1=variable name
+
+#AIM: print the 'School' variable column
+painters$School
+
 df[order(df$V1, df$V2...),] #function arguments: df=data frame, in square brackets specify within the order() the columns to sort by, and ',' to denote all rows. Note default ordering is Ascending
 
 #AIM: order the dataset based on the painters' Composition Score column in Ascending order
@@ -327,22 +332,25 @@ painters[order(-painters$Composition),] #append a minus sign in front of the var
 #use 'painters' data frame
 
 #select & deselect based on variables
-df[c(df$V1, df$V2...)] #function arguments: df=data frame, in square brackets specify columns to select or deselect
+df[, c("V1", "V2"...)] #function arguments: df=data frame, in square brackets specify columns to select or deselect
 
-#AIM: select the first 2 columns in the painters data frame
-painters[c(1,2)] #subset the df, taking just the 1st & 2nd columns (and all the rows)
+#AIM: select the Composition & Drawing variables based on their columne name
+painters[, c("Composition", "Drawing")] #subset the df, selecting just the named columns
 
-#AIM: drop the 4th column in the painters data frame, Expression
-painters[-4] #returns the subsetted df with the 4th column, Expression removed
+#AIM: select the Composition & Drawing variables based on their column positions in the painters data frame
+painters[, c(1,2)] #subset the df, selecting just the 1st & 2nd columns (and all the rows)
+
+#AIM: drop the Expression variable based on it's column position in the painters data frame
+painters[, -4] #returns the subsetted df having deselected the 4th column, Expression
 
 #select & deselect based on variable values
-df[which(),] #df=data frame, specify the variable value within the which() to subset the df on, then ',' to denote all rows returned
+df[which(),] #df=data frame, specify the variable value within the which() to subset the df on, then ',' with nothing after to denote all columns returned
 
 #AIM: select all rows where the painters' School is the 'A' category
-painters[which(painters$School == "A"),] #returns the subsetted df where equality holds true, i.e. value in School variable column is 'A'
+painters[which(painters$School == "A"),] #returns the subsetted df where equality holds true, i.e. row value in School variable column is 'A'
 
 #AIM: deselect all rows where the painters' School is the 'A' category, i.e. return df subset without 'A' values
-painters[which(painters$School != "A"),] #returns the subsetted df where equality holds true, i.e. value in School variable column is not 'A'
+painters[which(painters$School != "A"),] #returns the subsetted df where equality holds true, i.e. row value in School variable column is 'not A'
 ```
 
 ---
