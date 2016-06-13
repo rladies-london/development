@@ -42,7 +42,7 @@ knitr::opts_chunk$set(echo = TRUE)
 
 #####7:30pm | C. Core
 * 13. `df[order(),]`
-* 14. `df[]`, `which()`
+* 14. `df[,c()]`, `df[which(),]`
 * 15. `table()`
 * 16. `mean()`, `median()`, `sd()`, `var()`, `sum()`, `min()`, `max()`, `range()`
 * 17. `apply()`
@@ -331,25 +331,26 @@ painters[order(-painters$Composition), c(1:3)]
 
 ---
 
-#### 14. Data Frame Select & Deselect - `df[]`, `which()`
+#### 14. Data Frame Select & Deselect - `df[,c()]`, `df[which(),]`
 
 ```{r 14, eval = FALSE}
 #use 'painters' data frame
 
 #syntax for select & deselect based on column variables
-df[, c("V1", "V2"...)] #function arguments: df=data frame, in square brackets specify columns to select or deselect
+df[, c("V1", "V2"...)] #function arguments: df=data frame, in square brackets specify columns to select or deselect. The comma specifies returning all the rows. If certain rows are wanted this can be specified before the comma.
 
 #AIM: select the Composition & Drawing variables based on their columne name
-painters[, c("Composition", "Drawing")] #subset the df, selecting just the named columns
+painters[, c("Composition", "Drawing")] #subset the df, selecting just the named columns (and all the rows)
 
 #AIM: select the Composition & Drawing variables based on their column positions in the painters data frame
 painters[, c(1,2)] #subset the df, selecting just the 1st & 2nd columns (and all the rows)
 
-#AIM: drop the Expression variable based on it's column position in the painters data frame
-painters[, -4] #returns the subsetted df having deselected the 4th column, Expression
+#AIM: drop the Expression variable based on it's column position in the painters data frame and return just the first 5 rows
+painters[c(1:5), -4] #returns the subsetted df having deselected the 4th column, Expression and the first 5 rows
 
-#select & deselect based on variable values
-df[which(),] #df=data frame, specify the variable value within the which() to subset the df on. Again, the tailing comma specifies returning all the columns. If certain columns are wanted this can be specified after the comma.
+
+#syntax for select & deselect based on row variable values
+df[which(),] #df=data frame, specify the variable value within the `which()` to subset the df on. Again, the tailing comma specifies returning all the columns. If certain columns are wanted this can be specified after the comma.
 
 #AIM: select all rows where the painters' School is the 'A' category
 painters[which(painters$School == "A"),] #returns the subsetted df where equality holds true, i.e. row value in School variable column is 'A'
@@ -466,19 +467,19 @@ else
     'another statement'
 }
 
-#AIM: here we want to test if the object, 'condition.to.test' is smaller than 10. If it is smaller, another object, 'result.after.test' is assigned the value 'smaller'. Otherwise, the 'result.after.test' object is assigned the value 'bigger'
-if (condition.to.test < 5)
+#AIM: here we want to test if the object, 'condition_to_test' is smaller than 10. If it is smaller, another object, 'result_after_test' is assigned the value 'smaller'. Otherwise, the 'result_after_test' object is assigned the value 'bigger'
+if (condition_to_test < 5)
 {
-    result.after.test = 'Below Average'
+    result_after_test = 'Below Average'
 }
 else
 {
-    result.after.test = 'Above Average'
+    result_after_test = 'Above Average'
 }
 
-condition.to.test <- 7 #we specify what the condition actually is
+condition_to_test <- 7 #we specify what the condition actually is
 
-result.after.test #returns the result of our if-statement given the specific condition tested
+result_after_test #returns the result of our if-statement given the specific condition tested
 ```
 
 ---
@@ -515,14 +516,14 @@ container #check results: the loop is instructed to square every element of the 
 #### 22. Programming Tools - `function()...`
 User-programmed functions allow you to specify customised arguments and returned values.
 ```{r 22, eval = FALSE}
-#AIM: to create a simplified take-home pay calculator (single-band), called 'takehome_pay'. Our function therefore uses two arguments, a 'tax.rate', and an 'income' level. The code in the curly braces {} instructs what the 'takehome.pay' function should do when it is called, namely, calculate the tax owed in an object 'tax', and then return the result of the 'income' object minus the 'tax' object
-takehome_pay <- function(tax.rate, income)
+#AIM: to create a simplified take-home pay calculator (single-band), called 'takehome_pay'. Our function therefore uses two arguments, a 'tax_rate', and an 'income' level. The code in the curly braces {} instructs what the 'takehome_pay' function should do when it is called, namely, calculate the tax owed in an object 'tax', and then return the result of the 'income' object minus the 'tax' object
+takehome_pay <- function(tax_rate, income)
 {
-    tax = tax.rate * income
+    tax = tax_rate * income
     return(income - tax)
 }
 
-takehome_pay(tax.rate = 0.2, income = 25000) #call our function to calculate 'takehome_pay' on a 'tax.rate' of 20% and an 'income' of 25k
+takehome_pay(tax_rate = 0.2, income = 25000) #call our function to calculate 'takehome_pay' on a 'tax_rate' of 20% and an 'income' of 25k
 ```
 
 ---
