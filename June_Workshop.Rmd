@@ -461,9 +461,7 @@ if ('test expression')
 if ('test expression')
 {
     'statement'
-}
-else
-{
+}else{
     'another statement'
 }
 
@@ -471,9 +469,7 @@ else
 if (condition_to_test < 5)
 {
     result_after_test = 'Below Average'
-}
-else
-{
+}else{
     result_after_test = 'Above Average'
 }
 
