@@ -101,7 +101,7 @@ library("shinyapps")
 #### 4. Write Comments - `#foo`
 
 ```{r 4, eval=FALSE}
-#Add comments within your code using a hashtag - R will ignore everything to the right of the hashtag within that line
+3 + 5 #Add comments within your code using a hashtag - R will ignore everything to the right of the hashtag within that line
 ```
 
 ---
@@ -110,7 +110,7 @@ library("shinyapps")
 
 ```{r 5, eval=FALSE}
 data() #shows available datasets
-data("iris")
+data("iris") #load an available dataset
 ```
 
 ---
@@ -207,6 +207,7 @@ write.table(object, "xxx.txt", sep = "\t")
 
 #### 8. I/O Saving Down & Loading Objects - `save()`, `load()`
 
+These two commands allow you to save a named R object to a file and restore that object again.     
 Navigate to the working directory you want to save the object in then run the command:
 ```{r save object, eval = FALSE}
 save(object, file = "xxx.rda")
