@@ -453,25 +453,25 @@ An `if` statement is used when certain computations are conditional and only exe
 ```{r 20, eval = FALSE}
 #if-statement syntax
 if ('test expression')
-{
+    {
     'statement'
-}
+    }
 
 #if...else statement
 if ('test expression')
-{
+    {
     'statement'
-}else{
+    }else{
     'another statement'
-}
+    }
 
 #AIM: here we want to test if the object, 'condition_to_test' is smaller than 10. If it is smaller, another object, 'result_after_test' is assigned the value 'smaller'. Otherwise, the 'result_after_test' object is assigned the value 'bigger'
 if (condition_to_test < 5)
-{
+    {
     result_after_test = 'Below Average'
-}else{
+    }else{
     result_after_test = 'Above Average'
-}
+    }
 
 condition_to_test <- 7 #we specify what the condition actually is
 
@@ -485,24 +485,24 @@ A `for` loop is an automation method for repeating (looping) a specific set of i
 ```{r 21, eval = FALSE}
 #for loop syntax requires a counter, often called 'i' to denote an index
 for ('counter' in 'looping vector')
-{
+    {
     'instructions'
-}
+    }
 
 #AIM: here we want to print the phrase "In the Year yyyy" 6x, once for each year between 2010 to 2015.
 #this for loop executes the code chunk 'print(past("In the Year", i)) for each of the 'i' index values
 for (i in 2010:2015)
-{
+    {
     print(paste("In the Year", i))
-}
+    }
 
 #AIM: create an object which contains 10 items, namely each number between 1 and 10 squared
 #to store rather than just print results, an empty storage container needs to be created prior to running the loop, here called container
 container <- NULL
 for (i in 1:10)
-{
+    {
     container[i] = i^2
-}
+    }
 
 container #check results: the loop is instructed to square every element of the looping vector, 1:10. The ith element returned is therefore the value of i^2, e.g. the 3rd element is 3^2.
 ```
@@ -514,10 +514,10 @@ User-programmed functions allow you to specify customised arguments and returned
 ```{r 22, eval = FALSE}
 #AIM: to create a simplified take-home pay calculator (single-band), called 'takehome_pay'. Our function therefore uses two arguments, a 'tax_rate', and an 'income' level. The code in the curly braces {} instructs what the 'takehome_pay' function should do when it is called, namely, calculate the tax owed in an object 'tax', and then return the result of the 'income' object minus the 'tax' object
 takehome_pay <- function(tax_rate, income)
-{
+    {
     tax = tax_rate * income
     return(income - tax)
-}
+    }
 
 takehome_pay(tax_rate = 0.2, income = 25000) #call our function to calculate 'takehome_pay' on a 'tax_rate' of 20% and an 'income' of 25k
 ```
