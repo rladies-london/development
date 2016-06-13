@@ -62,6 +62,14 @@ knitr::opts_chunk$set(echo = TRUE)
 
 ---
 
+### *REMEMBER: KEY R LANGUAGE SYNTAX*
+* **Case Sensitivity**: as per most UNIX based packages, R is case sensitive, hence `X` and `x` are different symbols and would refer to different variables.    
+* **Expressions vs Assignments**: and expression, like `3 + 5` can be given as a command which will be evaluated and the value immediately printed, but not stored. An assignment however, like `sum <- 3 + 5` using the assignment operator `<-` also evaluates the expression `3 + 5`, but instead of printing and not storing, it stores the value in the object `sum` but doesn't print the result. The object `sum` would need to be called to print the result.    
+* **Reserved Words**: choice for naming objects is almost entirely free, except for these reserved words: https://stat.ethz.ch/R-manual/R-devel/library/base/html/Reserved.html    
+* **Spacing**: outside of the function structure, spaces don't matter, e.g. `3+5` is the same as `3+     5` is the same as `3 + 5`. For more best-practices for R code Hadley Wickham's Style Guide is a useful reference: http://adv-r.had.co.nz/Style.html
+
+---    
+
 ### A. SOME ESSENTIAL FUNCTIONS
 
 #### 1. Bring up help documentation & examples - `?foo`, `help(foo)`, `example(foo)`
