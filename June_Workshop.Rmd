@@ -41,8 +41,8 @@ knitr::opts_chunk$set(echo = TRUE)
 ---
 
 #####7:30pm | C. Core
-* 13. `foo[order()]`
-* 14. `foo[]`, `which()`
+* 13. `df[order()]`
+* 14. `df[]`, `which()`
 * 15. `table()`
 * 16. `mean()`, `median()`, `sd()`, `var()`, `sum()`, `min()`, `max()`, `range()`
 * 17. `apply()`
@@ -302,7 +302,7 @@ convert <- as.data.frame(coof) #convert a non-data frame object into a data fram
 
 ### C. SOME CORE FUNCTIONS
 
-#### 13. Data Frame Sort - `foo[order()]`
+#### 13. Data Frame Sort - `df[order()]`
 
 ```{r 13, eval = FALSE}
 #use 'painters' data frame
@@ -310,11 +310,13 @@ library("MASS") #call package with the required data
 data("painters") #load required data
 View(painters) #scan dataset
 
-df$V1 #syntax for using a specific variable: df=data frame, '$', V1=variable name
+#syntax for using a specific variable: df=data frame, '$', V1=variable name
+df$V1 
 
 #AIM: print the 'School' variable column
 painters$School
 
+#syntax for df{order()]
 df[order(df$V1, df$V2...),] #function arguments: df=data frame, in square brackets specify within the order() the columns to sort by, and ',' to denote all rows. Note default ordering is Ascending
 
 #AIM: order the dataset based on the painters' Composition Score column in Ascending order
@@ -326,12 +328,12 @@ painters[order(-painters$Composition),] #append a minus sign in front of the var
 
 ---
 
-#### 14. Data Frame Select & Deselect - `foo[]`, `which()`
+#### 14. Data Frame Select & Deselect - `df[]`, `which()`
 
 ```{r 14, eval = FALSE}
 #use 'painters' data frame
 
-#select & deselect based on variables
+#syntax for select & deselect based on column variables
 df[, c("V1", "V2"...)] #function arguments: df=data frame, in square brackets specify columns to select or deselect
 
 #AIM: select the Composition & Drawing variables based on their columne name
@@ -360,13 +362,18 @@ painters[which(painters$School != "A"),] #returns the subsetted df where equalit
 
 ```{r 15, eval = FALSE}
 #create new data frame
-flavour <- c("choc", "strawberry", "vanilla", "choc", "strawberry", "strawberry")
+flavour <- c("choc", "strawberry", "vanilla", "choc", "strawberry", "strawberry") 
 gender <- c("F", "F", "M", "M", "F", "M")
-icecream <- data.frame(flavour, gender)
+icecream <- data.frame(flavour, gender) #icecream df made up of 2 factor variables, flavour & gender, with 3 & 2 levels respectively (choc/strawberry/vanilla & F/M)
 
-table(icecream$gender) #returns frequency distribution table with count of the selected data frame variable (df$variable)
-table(icecream$flavour) #as above
-table(icecream$flavour, icecream$gender) #2-way/contingency table
+#AIM: create a frequency distribution table which shows the count of each gender in the df
+table(icecream$gender) 
+
+#AIM: create a frequency distribution table which shows the count of each flavour in the df
+table(icecream$flavour)
+
+#AIM: create Contingency/2-Way Table showing the counts for each combination of flavour & gender level 
+table(icecream$flavour, icecream$gender)
 ```
 
 ---
@@ -374,7 +381,8 @@ table(icecream$flavour, icecream$gender) #2-way/contingency table
 #### 16. Descriptive/Summary Stats Functions - `mean()`, `median()`, `sd()`, `var()`, `sum()`, `min()`, `max()`, `range()`
 
 ```{r 16, eval = FALSE}
-jumble <- c(4, 1, 2, 3) #re-using the jumble vector from before
+#re-using the jumble vector from before
+jumble <- c(4, 1, 2, 3) 
 
 mean(jumble)
 median(jumble)
@@ -391,12 +399,17 @@ range(jumble)
 #### 17. Apply Functions - `apply()`
 `apply()` returns a vector, array or list of values where a specified function has been applied to the 'margins' (rows/cols combo) of the original vector/array/list.
 ```{r 17, eval = FALSE}
-moof <- matrix(data = 1:12, nrow=3, ncol=4) #re-using the moof matrix from before
+#re-using the moof matrix from before
+moof <- matrix(data = 1:12, nrow=3, ncol=4) 
 
+#apply syntax
 apply(X, MARGIN, FUN,...) #function arguments: X=an array, MARGIN=1 to apply to rows/2 to apply to cols, FUN=function to apply
 
-apply(moof, 1, sum) #using the moof matrix, apply the sum function to the rows
-apply(moof, 2, sum) #using the moof matrix, apply the sum function to the columns
+#AIM: using the moof matrix, apply the sum function to the rows
+apply(moof, 1, sum) 
+
+#AIM: using the moof matrix, apply the sum function to the columns
+apply(moof, 2, sum) 
 ```
 
 ---
@@ -405,11 +418,14 @@ apply(moof, 2, sum) #using the moof matrix, apply the sum function to the column
 A list, a common data structure, is a generic vector containing objects of any types.
 `lapply()` returns a list where each element returned is the result of applying a specified function to the objects in the list.
 ```{r 18, eval = FALSE}
-bundle <- list(moof, jumble, foo) #creates list of various vectors and matrices
+#create list of various vectors and matrices
+bundle <- list(moof, jumble, foo) 
 
+#lapply syntax
 lapply(X, FUN,...) #function arguments: X=a list, FUN=function to apply
 
-lapply(bundle, mean) #using the bundle list, apply the mean function to each object in the list
+#AIM: using the bundle list, apply the mean function to each object in the list
+lapply(bundle, mean)
 ```
 
 ---
@@ -417,6 +433,7 @@ lapply(bundle, mean) #using the bundle list, apply the mean function to each obj
 #### 19. Apply Functions - `tapply()`
 `tapply()` applies a specified function to specified groups/subsets of a factor variable.
 ```{r 19, eval = FALSE}
+#tapply syntax
 tapply(X, INDEX, FUN,...) #function arguments: X=an atomic object, INDEX=list of 1+ factors of X length, FUN=function to apply
 
 #AIM: calculate the mean Drawing Score of the painters, but grouped by School category
