@@ -29,7 +29,7 @@ knitr::opts_chunk$set(echo = TRUE)
 * 8. `save()`, `load()`
 
 #####6.50pm | B. Basics
-* 9. `c()`, `cbind()`, `rbind()`
+* 9. `c()`, `cbind()`, `rbind()`, `matrix()`
 * 10. `length()`, `dim()`
 * 11. `sort()`, `'vector'[]`, `'matrix'[]`
 * 12. `data.frame()`, `class()`, `names()`, `str()`, `summary()`, `View()`, `head()`, `tail()`, `as.data.frame()`
@@ -62,7 +62,7 @@ knitr::opts_chunk$set(echo = TRUE)
 
 ---
 
-### A. SOME ESSENTIALS FUNCTIONS
+### A. SOME ESSENTIAL FUNCTIONS
 
 #### 1. Bring up help documentation & examples - `?foo`, `help(foo)`, `example(foo)`
 
@@ -220,16 +220,19 @@ load("xxx.rda")
 
 ### B. SOME BASIC FUNCTIONS
 
-#### 9. Vector & Matrix Construction - `c()`, `cbind()`, `rbind()`
-Vectors & Matrices are very common R data structures.
+#### 9. Vector & Matrix Construction - `c()`, `cbind()`, `rbind()`, `matrix()`
+Vectors (lists) & Matrices (two-dimensional arrays) are very common R data structures.
 ```{r 9, eval = FALSE}
-foo <- c(1, 2, 3, 4) #creates a vector by concatenating data
-oof <- c("A", "B", "C", "D")
+#use c() to construct a vector by concatenating data
+foo <- c(1, 2, 3, 4) #example of a numeric vector
+oof <- c("A", "B", "C", "D") #example of a character vector
+ofo <- c(TRUE, FALSE, TRUE, TRUE) #example of a logical vector
 
+#use cbind() & rbind() to construct matrices
 coof <- cbind(foo, oof) #bind vectors in column concatenation to make a matrix
-
 roof <- rbind(foo, oof) #bind vectors in row concatenation to make a matrix
 
+#use matrix() to construct matrices
 moof <- matrix(data = 1:12, nrow=3, ncol=4) #creates matrix by specifying set of values, no. of rows & no. of columns
 ```
 
@@ -249,12 +252,12 @@ dim(coof) #returns dimensions (no. of rows & columns) of vector/matrix/dataframe
 
 ```{r 11, eval = FALSE}
 jumble <- c(4, 1, 2, 3)
-sort(jumble) #this numeric vector is sorted ascending (default)
-sort(jumble, decreasing = TRUE) #specify the decreasing arg to reverse default
+sort(jumble) #sorts a numeric vector in ascending order (default)
+sort(jumble, decreasing = TRUE) #specify the decreasing arg to reverse default sort
 
 mumble <- c( "D", "B", "C", "A")
-sort(mumble) #this character vector is sorted ascending (default)
-sort(mumble, decreasing = TRUE) #specify the decreasing arg to reverse default
+sort(mumble) #sorts a character vector in ascending order (default)
+sort(mumble, decreasing = TRUE) #specify the decreasing arg to reverse default sort
 
 jumble[1] #selects first value in our oof vector
 tail(jumble, n=1) #selects last value
@@ -274,15 +277,15 @@ coof[c(1,2,3),] #selects the 1st, 2nd & 3rd rows (same as previous)
 #### 12. Create & Explore Data Frames - `data.frame()`, `class()`, `names()`, `str()`, `summary()`, `View()`, `head()`, `tail()`, `as.data.frame()`
 A data frame is a matrix-like data structure made up of lists of variables with the same number of rows, which can be of differing data types (numeric, character, factor etc.) - matrices must have columns all of the same data type.
 ```{r 12, eval = FALSE}
-df <- data.frame("V1"=1:4, "V2"=c("A","B","C","D"), "V3"=5:8) #creates a data frame with 3 columns with 4 rows each
+doof <- data.frame("V1"=1:4, "V2"=c("A","B","C","D"), "V3"=5:8) #creates a data frame with 3 columns with 4 rows each
 
-class(df) #check data frame object class
-names(df) # returns column names
-str(df) #see structure of data frame
-summary(df) #returns basic summary stats
-View(df) #invokes spreadsheet-style viewer
-head(df, n=2) #shows first parts of object, here requesting the first 2 rows
-tail(df, n=2) #shows last parts of object, here requesting the last 2 rows
+class(doof) #check data frame object class
+names(doof) # returns column names
+str(doof) #see structure of data frame
+summary(doof) #returns basic summary stats
+View(doof) #invokes spreadsheet-style viewer
+head(doof, n=2) #shows first parts of object, here requesting the first 2 rows
+tail(doof, n=2) #shows last parts of object, here requesting the last 2 rows
 
 convert <- as.data.frame(coof) #convert a non-data frame object into a data frame
 ```
