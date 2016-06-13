@@ -317,7 +317,7 @@ df$V1
 painters$School
 
 #syntax for df[order(),]
-df[order(df$V1, df$V2...),] #function arguments: df=data frame, in square brackets specify within the order() the columns to sort by where default ordering is Ascending, the tailing comma specifies taking all the columns. If certain columns are wanted this can be specified after the comma.
+df[order(df$V1, df$V2...),] #function arguments: df=data frame, in square brackets specify within the order() the columns to sort by where default ordering is Ascending, the tailing comma specifies returning all the columns. If certain columns are wanted this can be specified after the comma.
 
 #AIM: order the dataset based on the painters' Composition Score column in Ascending order
 painters[order(painters$Composition),] #Composition is the sorting variable
@@ -325,7 +325,7 @@ painters[order(painters$Composition),] #Composition is the sorting variable
 #AIM: order the dataset based on the painters' Composition Score column in Descending order
 painters[order(-painters$Composition),] #append a minus sign in front of the variable you want to sort by in Descending order
 
-#AIM: order the dataset based on the painters' Composition Score column in Descending order and show the first 3 columns
+#AIM: order the dataset based on the painters' Composition Score column in Descending order but return just the first 3 columns
 painters[order(-painters$Composition), c(1:3)]
 ```
 
@@ -349,7 +349,7 @@ painters[, c(1,2)] #subset the df, selecting just the 1st & 2nd columns (and all
 painters[, -4] #returns the subsetted df having deselected the 4th column, Expression
 
 #select & deselect based on variable values
-df[which(),] #df=data frame, specify the variable value within the which() to subset the df on, then ',' with nothing after to denote all columns returned
+df[which(),] #df=data frame, specify the variable value within the which() to subset the df on. Again, the tailing comma specifies returning all the columns. If certain columns are wanted this can be specified after the comma.
 
 #AIM: select all rows where the painters' School is the 'A' category
 painters[which(painters$School == "A"),] #returns the subsetted df where equality holds true, i.e. row value in School variable column is 'A'
