@@ -41,7 +41,7 @@ knitr::opts_chunk$set(echo = TRUE)
 ---
 
 #####7:30pm | C. Core
-* 13. `df[order()]`
+* 13. `df[order(),]`
 * 14. `df[]`, `which()`
 * 15. `table()`
 * 16. `mean()`, `median()`, `sd()`, `var()`, `sum()`, `min()`, `max()`, `range()`
@@ -302,7 +302,7 @@ convert <- as.data.frame(coof) #convert a non-data frame object into a data fram
 
 ### C. SOME CORE FUNCTIONS
 
-#### 13. Data Frame Sort - `df[order()]`
+#### 13. Data Frame Sort - `df[order(),]`
 
 ```{r 13, eval = FALSE}
 #use 'painters' data frame
@@ -316,14 +316,17 @@ df$V1
 #AIM: print the 'School' variable column
 painters$School
 
-#syntax for df{order()]
-df[order(df$V1, df$V2...),] #function arguments: df=data frame, in square brackets specify within the order() the columns to sort by, and ',' to denote all rows. Note default ordering is Ascending
+#syntax for df[order(),]
+df[order(df$V1, df$V2...),] #function arguments: df=data frame, in square brackets specify within the order() the columns to sort by where default ordering is Ascending, the tailing comma specifies taking all the columns. If certain columns are wanted this can be specified after the comma.
 
 #AIM: order the dataset based on the painters' Composition Score column in Ascending order
 painters[order(painters$Composition),] #Composition is the sorting variable
 
 #AIM: order the dataset based on the painters' Composition Score column in Descending order
 painters[order(-painters$Composition),] #append a minus sign in front of the variable you want to sort by in Descending order
+
+#AIM: order the dataset based on the painters' Composition Score column in Descending order and show the first 3 columns
+painters[order(-painters$Composition), c(1:3)]
 ```
 
 ---
