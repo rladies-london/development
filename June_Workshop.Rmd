@@ -12,17 +12,17 @@ knitr::opts_chunk$set(echo = TRUE)
 
 > This is *NOT* intended to be fully comprehensive list of every useful R function that exists, but is a practical demonstration of selected relevant examples presented in user-friendly format, all available in base R. For a wider collection to work through, this Reference Card is recommended: https://cran.r-project.org/doc/contrib/Baggott-refcard-v2.pdf
 
-> Additional CRAN reference cards and R material (and non-English documentation) found here: https://cran.r-project.org/other-docs.html
+> Additional CRAN reference cards and R guides (including non-English documentation) found here: https://cran.r-project.org/other-docs.html
 
 ---
 
 #### Schedule
 
 #####6.30pm | A. Essentials
-* 1. `?foo`, `help(foo)`, `example(foo)`
-* 2. `install.packages("foo")`, `library("foo")`
-* 3. `devtools::install_github("username/packagename")`
-* 4. `#foo`
+* 1. `getwd()`, `setwd()`
+* 2. `?foo`, `help(foo)`, `example(foo)`
+* 3. `install.packages("foo")`, `library("foo")`
+* 4. `devtools::install_github("username/packagename")`
 * 5. `data("foo")`
 * 6. `read.csv`, `read.table`
 * 7. `write.table()`
@@ -67,14 +67,32 @@ knitr::opts_chunk$set(echo = TRUE)
 * **Expressions vs Assignments**: and expression, like `3 + 5` can be given as a command which will be evaluated and the value immediately printed, but not stored. An assignment however, like `sum <- 3 + 5` using the assignment operator `<-` also evaluates the expression `3 + 5`, but instead of printing and not storing, it stores the value in the object `sum` but doesn't print the result. The object `sum` would need to be called to print the result.    
 * **Reserved Words**: choice for naming objects is almost entirely free, except for these reserved words: https://stat.ethz.ch/R-manual/R-devel/library/base/html/Reserved.html    
 * **Spacing**: outside of the function structure, spaces don't matter, e.g. `3+5` is the same as `3+     5` is the same as `3 + 5`. For more best-practices for R code Hadley Wickham's Style Guide is a useful reference: http://adv-r.had.co.nz/Style.html
+* **Comments**: add comments within your code using a hastag, `#`. R will ignore everything to the right of the hashtag within that line
 
 ---    
 
 ### A. SOME ESSENTIAL FUNCTIONS
 
-#### 1. Bring up help documentation & examples - `?foo`, `help(foo)`, `example(foo)`
-
+#### 1. Working Directory management - `getwd()`, `setwd()`
+R/RStudio is always pointed at a specific directory on your computer, so it's important to be able to check what's the current directory using `getwd()`, and to be able to change and specify a different directory to work in using `setwd()`.
 ```{r 1, eval=FALSE}
+#check the directory R is currently pointed at
+getwd()
+
+#specify a directory for R to point at - MAC
+setwd("/Users/User Name/Documents/FOLDER") #from the root directory
+setwd("~/Documents/FOLDER") #or from R's default working directory where "~/" refers to "/Users/User Name"
+
+#specify a directory for R to point at - Windows
+setwd("C:/Users/User Name/Documents/FOLDER") #from the root directory
+setwd("~/FOLDER") #or from R's default working directory where "~/" refers to "C:/Users/User Name/Documents"
+```
+
+---
+
+#### 2. Bring up help documentation & examples - `?foo`, `help(foo)`, `example(foo)`
+
+```{r 2, eval=FALSE}
 ?boxplot
 help(boxplot)
 example(boxplot)
@@ -82,10 +100,10 @@ example(boxplot)
 
 ---
 
-#### 2. Load & Call CRAN Packages - `install.packages("foo")`, `library("foo")`
+#### 3. Load & Call CRAN Packages - `install.packages("foo")`, `library("foo")`
 i.e. add-on functionality built for R but not pre-installed (base R). At time of writing, the CRAN package repository featured 8,576 available packages.
 
-```{r 2, eval=FALSE}
+```{r 3, eval=FALSE}
 install.packages("wordcloud")
 
 library("wordcloud") #best-practice loading
@@ -94,25 +112,18 @@ require("wordcloud") #often used instead of library, but don't use it (http://yi
 
 ---
 
-#### 3. Load & Call Packages from GitHub - `devtools::install_github("username/packagename")`
-
-```{r 3, eval=FALSE}
-install.packages("devtools")
-
-devtools::install_github("rstudio/shinyapps")
-
-library("shinyapps")
-```
-
----
-
-#### 4. Write Comments - `#foo`
-
+#### 4. Load & Call Packages from GitHub - `devtools::install_github("username/packagename")`
+e.g. to install the `shinyapps` package available from RStudio's GitHub account
 ```{r 4, eval=FALSE}
-3 + 5 #Add comments within your code using a hashtag - R will ignore everything to the right of the hashtag within that line
+install.packages("devtools") #pre-requisite for `devtools...` function
+
+devtools::install_github("rstudio/shinyapps") #install specific package from specific GitHub account
+
+library("shinyapps") #Call package
 ```
 
 ---
+
 
 #### 5. Load datasets from base R & Loaded Packages  - `data("foo")`
 
