@@ -357,8 +357,8 @@ df[which(),] #df=data frame, specify the variable value within the `which()` to 
 #AIM: select all rows where the painters' School is the 'A' category
 painters[which(painters$School == "A"),] #returns the subsetted df where equality holds true, i.e. row value in School variable column is 'A'
 
-#AIM: deselect all rows where the painters' School is the 'A' category, i.e. return df subset without 'A' values
-painters[which(painters$School != "A"),] #returns the subsetted df where equality holds true, i.e. row value in School variable column is 'not A'
+#AIM: deselect all rows where the painters' School is the 'A' category, i.e. return df subset without 'A' values, AND also only select rows where Colour score > 10
+painters[which(painters$School != "A" & painters$Colour > 10),] #returns the subsetted df where equality holds true, i.e. row value in School variable column is 'not A', AND the Colour score filter is also true.
 ```
 
 ---
