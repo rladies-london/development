@@ -170,7 +170,7 @@ object <- read.table("xxx.txt", sep = "\t", header = FALSE)
 
 ##### (b) I/O When NOT in the working directory where the data is
 
-For example to import and save a local **csv** file from a different working directory you can either need to specify the file path (operating system specific), e.g.:
+For example to import and save a local **csv** file from a different working directory you either need to specify the file path (operating system specific), e.g.:
 ```{r load csv file path, eval = FALSE}
 #on a mac
 object <- read.csv("~/Desktop/R/data.csv")
@@ -303,7 +303,8 @@ coof[c(1,2,3),] #selects the 1st, 2nd & 3rd rows (same as previous)
 #### 12. Create & Explore Data Frames - `data.frame()`, `class()`, `names()`, `str()`, `summary()`, `View()`, `head()`, `tail()`, `as.data.frame()`
 A data frame is a matrix-like data structure made up of lists of variables with the same number of rows, which can be of differing data types (numeric, character, factor etc.) - matrices must have columns all of the same data type.
 ```{r 12, eval = FALSE}
-doof <- data.frame("V1"=1:4, "V2"=c("A","B","C","D"), "V3"=5:8) #creates a data frame with 3 columns with 4 rows each
+#create a data frame with 3 columns with 4 rows each
+doof <- data.frame("V1"=1:4, "V2"=c("A","B","C","D"), "V3"=5:8)
 
 class(doof) #check data frame object class
 names(doof) # returns column names
@@ -484,6 +485,11 @@ if ('test expression')
     }
 
 #AIM: here we want to test if the object, 'condition_to_test' is smaller than 10. If it is smaller, another object, 'result_after_test' is assigned the value 'smaller'. Otherwise, the 'result_after_test' object is assigned the value 'bigger'
+
+#specify the 'test expression'
+condition_to_test <- 7 
+
+#write your 'if...else' function based on a 'statement' or 'another statement' dependent on the 'condition_to_test'. 
 if (condition_to_test > 5)
     {
     result_after_test = 'Above Average'
@@ -491,9 +497,8 @@ if (condition_to_test > 5)
     result_after_test = 'Below Average'
     }
 
-condition_to_test <- 7 #we specify what the condition actually is
-
-result_after_test #returns the result of our if-statement given the specific condition tested
+#call the resulting 'statement' as per the instruction of the 'if...else' statement
+result_after_test 
 ```
 
 ---
