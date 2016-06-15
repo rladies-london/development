@@ -101,13 +101,14 @@ example(boxplot)
 ---
 
 #### 3. Load & Call CRAN Packages - `install.packages("foo")`, `library("foo")`
-i.e. add-on functionality built for R but not pre-installed (base R). At time of writing, the CRAN package repository featured 8,576 available packages.
+Packages are add-on functionality built for R but not pre-installed (base R), hence you need to install/load the packages you want yourself. The majority of packages you'd want have been submitted to and are available via CRAN. At time of writing, the CRAN package repository featured 8,592 available packages.
 
 ```{r 3, eval=FALSE}
+#AIM: load & call the "wordcloud" package from CRAN
 install.packages("wordcloud")
 
 library("wordcloud") #best-practice loading
-require("wordcloud") #often used instead of library, but don't use it (http://yihui.name/en/2014/07/library-vs-require/)
+require("wordcloud") #alternative function to 'library', but don't use it (http://yihui.name/en/2014/07/library-vs-require/)
 ```
 
 ---
@@ -115,6 +116,7 @@ require("wordcloud") #often used instead of library, but don't use it (http://yi
 #### 4. Load & Call Packages from GitHub - `devtools::install_github("username/packagename")`
 e.g. to install the `shinyapps` package available from RStudio's GitHub account
 ```{r 4, eval=FALSE}
+#AIM: load & call the "shinyapps" package from RStudio's GitHub
 install.packages("devtools") #pre-requisite for `devtools...` function
 
 devtools::install_github("rstudio/shinyapps") #install specific package from specific GitHub account
@@ -128,8 +130,11 @@ library("shinyapps") #Call package
 #### 5. Load datasets from base R & Loaded Packages  - `data("foo")`
 
 ```{r 5, eval=FALSE}
-data() #shows available datasets
-data("iris") #load an available dataset
+#AIM: show available datasets
+data() 
+
+#AIM: load an available dataset
+data("iris") 
 ```
 
 ---
