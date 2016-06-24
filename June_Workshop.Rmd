@@ -8,7 +8,7 @@ output: html_document
 ```{r setup, include=FALSE, eval=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 ```
-> Use this document to follow along during the session, published version on RPubs: (to be updated)
+> Use this document to follow along during the session, published version on RPubs: http://rpubs.com/crt34/june_workshop
 
 > This is *NOT* intended to be fully comprehensive list of every useful R function that exists, but is a practical demonstration of selected relevant examples presented in user-friendly format, all available in base R. For a wider collection to work through, this Reference Card is recommended: https://cran.r-project.org/doc/contrib/Baggott-refcard-v2.pdf
 
@@ -63,8 +63,8 @@ knitr::opts_chunk$set(echo = TRUE)
 ---
 
 ### *REMEMBER: KEY R LANGUAGE SYNTAX*
-* **Case Sensitivity**: as per most UNIX based packages, R is case sensitive, hence `X` and `x` are different symbols and would refer to different variables.    
-* **Expressions vs Assignments**: and expression, like `3 + 5` can be given as a command which will be evaluated and the value immediately printed, but not stored. An assignment however, like `sum <- 3 + 5` using the assignment operator `<-` also evaluates the expression `3 + 5`, but instead of printing and not storing, it stores the value in the object `sum` but doesn't print the result. The object `sum` would need to be called to print the result.    
+* **Case Sensitivity**: as per most UNIX-based packages, R is case sensitive, hence `X` and `x` are different symbols and would refer to different variables.    
+* **Expressions vs Assignments**: an expression, like `3 + 5` can be given as a command which will be evaluated and the value immediately printed, but not stored. An assignment however, like `sum <- 3 + 5` using the assignment operator `<-` also evaluates the expression `3 + 5`, but instead of printing and not storing, it stores the value in the object `sum` but doesn't print the result. The object `sum` would need to be called to print the result.    
 * **Reserved Words**: choice for naming objects is almost entirely free, except for these reserved words: https://stat.ethz.ch/R-manual/R-devel/library/base/html/Reserved.html    
 * **Spacing**: outside of the function structure, spaces don't matter, e.g. `3+5` is the same as `3+     5` is the same as `3 + 5`. For more best-practices for R code Hadley Wickham's Style Guide is a useful reference: http://adv-r.had.co.nz/Style.html
 * **Comments**: add comments within your code using a hastag, `#`. R will ignore everything to the right of the hashtag within that line
@@ -114,7 +114,7 @@ require("wordcloud") #alternative function to 'library', but don't use it (http:
 ---
 
 #### 4. Load & Call Packages from GitHub - `devtools::install_github("username/packagename")`
-e.g. to install the `shinyapps` package available from RStudio's GitHub account
+Not all packages you'll want will be available via CRAN, and you'll likely need to get certain packages from GitHub accounts. This example shows how to install the `shinyapps` package from RStudio's GitHub account.
 ```{r 4, eval=FALSE}
 #AIM: load & call the "shinyapps" package from RStudio's GitHub
 install.packages("devtools") #pre-requisite for `devtools...` function
