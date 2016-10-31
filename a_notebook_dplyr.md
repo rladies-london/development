@@ -4,13 +4,13 @@ R Notebook - Data Wrangling - dplyr
 dplyr agenda
 ------------
 
---Basics
---select()
---filter()
---arrange()
---mutate()
---summarize()
---group\_by()
+--Basics     
+--select()     
+--filter()     
+--arrange()     
+--mutate()     
+--summarize()     
+--group\_by()     
 
 ------------------------------------------------------------------------
 
