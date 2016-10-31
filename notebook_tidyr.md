@@ -28,7 +28,7 @@ library(ggplot2)
 
 ``` r
 tibble <- tbl_df(diamonds) #Convert diamonds dataset into tbl_df
-head(tibble, n=10) #View first 6 rows
+head(tibble) #View first 6 rows
 ```
 
     ## # A tibble: 6 × 10
