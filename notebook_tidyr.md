@@ -4,13 +4,13 @@ R Notebook - Data Wrangling - tidyr
 tidyr agenda
 ------------
 
---Basics
---gather()
---separate()
---arrange()
---mutate()
---summarize()
---group\_by()
+--Basics      
+--gather()     
+--separate()     
+--arrange()     
+--mutate()      
+--summarize()     
+--group\_by()     
 
 ------------------------------------------------------------------------
 
@@ -28,7 +28,7 @@ library(ggplot2)
 
 ``` r
 tibble <- tbl_df(diamonds) #Convert diamonds dataset into tbl_df
-head(tibble) #View first 6 rows
+head(tibble, n=10) #View first 6 rows
 ```
 
     ## # A tibble: 6 × 10
