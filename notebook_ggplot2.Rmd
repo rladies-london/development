@@ -1,0 +1,18 @@
+---
+title: "R Notebook - Data Viz - ggplot2"
+output: github_document
+---
+
+
+```{r 1}
+library(ggplot2)
+```
+
+
+```{r 2} 
+ggplot(diamonds, aes(x=cut)) + geom_bar()
+```
+```{r 3}
+ggplot(diamonds, aes(price, depth)) + geom_point()
+```
+
